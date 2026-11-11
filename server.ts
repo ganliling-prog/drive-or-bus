@@ -2,9 +2,10 @@ import 'dotenv/config';
 import express from 'express';
 import path from 'path';
 import { fileURLToPath } from 'url';
-import healthHandler from './api/health.ts';
-import carparkHandler from './api/carparkavailability.ts';
-import busArrivalHandler from './api/busarrival.ts';
+import healthHandler from './api/health.js';
+import carparkHandler from './api/carparks.js';
+import busArrivalHandler from './api/bus.js';
+import feedHandler from './api/feed.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -16,13 +17,17 @@ async function startServer() {
 
   app.use(express.json());
 
+  // RSS 2.0 Feed for Zapier
+  app.get('/api/feed', feedHandler);
+
   // API Route Mappings (delegating to serverless /api handlers)
   app.all('/api/health', healthHandler);
   app.all('/api/carparkavailability', carparkHandler);
   app.all('/api/busarrival', busArrivalHandler);
 
-  // Fallback aliases for convenience
+  // Additional aliases
   app.all('/api/carparks', carparkHandler);
+  app.all('/api/bus', busArrivalHandler);
   app.all('/api/bus/04121', (req, res) => {
     req.query.BusStopCode = '04121';
     return busArrivalHandler(req, res);
