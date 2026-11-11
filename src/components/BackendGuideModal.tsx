@@ -156,28 +156,42 @@ app.get('/api/carparks', async (req, res) => {
             </div>
           </div>
 
+          {/* Existing Serverless Files in /api */}
+          <div className="p-3 bg-blue-50/70 dark:bg-blue-950/40 rounded-xl border border-blue-200 dark:border-blue-800">
+            <h4 className="font-bold text-blue-900 dark:text-blue-200 text-xs mb-1">
+              Active Serverless Functions in <code className="font-mono">/api</code>:
+            </h4>
+            <ul className="space-y-1 text-slate-700 dark:text-slate-300 text-[11px]">
+              <li className="flex items-center gap-1.5">
+                <span className="font-mono font-bold text-blue-600 dark:text-blue-400">/api/health.ts</span>
+                <span>— Service status &amp; checks if AccountKey is set</span>
+              </li>
+              <li className="flex items-center gap-1.5">
+                <span className="font-mono font-bold text-blue-600 dark:text-blue-400">/api/carparkavailability.ts</span>
+                <span>— Fetches live HDB, LTA, and URA carpark lots</span>
+              </li>
+              <li className="flex items-center gap-1.5">
+                <span className="font-mono font-bold text-blue-600 dark:text-blue-400">/api/busarrival.ts</span>
+                <span>— Fetches live next buses for Stop 04121 (v3)</span>
+              </li>
+            </ul>
+          </div>
+
           <div>
             <div className="flex items-center justify-between mb-1.5">
               <h4 className="font-bold text-slate-900 dark:text-white text-sm">
-                Sample Express.js Backend Code:
+                How to provide your LTA DataMall Key:
               </h4>
-              <button
-                onClick={() => copyToClipboard(sampleExpressCode, 3)}
-                className="flex items-center gap-1 text-blue-600 dark:text-blue-400 hover:underline cursor-pointer"
-              >
-                {copiedIndex === 3 ? (
-                  <>
-                    <Check className="w-3.5 h-3.5" /> Copied!
-                  </>
-                ) : (
-                  <>
-                    <Copy className="w-3.5 h-3.5" /> Copy Code
-                  </>
-                )}
-              </button>
             </div>
+            <p className="text-[11px] text-slate-600 dark:text-slate-400 mb-2">
+              Set <code className="bg-slate-100 dark:bg-slate-800 px-1 py-0.5 rounded font-mono font-semibold">LTA_DATAMALL_KEY="your-32-char-key"</code> in your environment (<code className="font-mono">.env</code> or hosting environment variables). The endpoints will automatically forward it as the <code className="font-mono font-semibold">AccountKey</code> header.
+            </p>
             <pre className="p-3 bg-slate-950 text-slate-200 rounded-xl overflow-x-auto text-[11px] font-mono leading-relaxed border border-slate-800">
-              {sampleExpressCode}
+# In .env:
+LTA_DATAMALL_KEY="YOUR_LTA_DATAMALL_ACCOUNT_KEY"
+
+# Or run locally:
+LTA_DATAMALL_KEY="your-key" npm run dev
             </pre>
           </div>
         </div>
