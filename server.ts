@@ -2,7 +2,7 @@ import 'dotenv/config';
 import express from 'express';
 import path from 'path';
 import { fileURLToPath } from 'url';
-import healthHandler from './api/health.js';
+import healthHandler from './api/health.ts';
 import carparkHandler from './api/carparks.js';
 import busArrivalHandler from './api/bus.js';
 import feedHandler from './api/feed.js';
