@@ -1,0 +1,6 @@
+{
+  "name": "SMU Park & Ride Commute Advisor",
+  "description": "Real-time carpark availability near Singapore Management University and live bus arrivals for Bus Stop 04121 to decide between campus parking or park-and-ride.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
